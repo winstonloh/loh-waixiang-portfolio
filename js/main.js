@@ -293,17 +293,10 @@
     if ("letterSpacing" in c) c.letterSpacing = "0px";
     if (!dark) hero.style.setProperty("--hello-top", `${y1 - hs * 0.8}px`);
 
-    // ---- figure, plus a hairline of the word where it passes over the figure
+    // ---- figure (drawn on its own layer, always in front of the word)
     if (img && img.naturalWidth) {
       const h = ph + 24, w = h * (img.naturalWidth / img.naturalHeight), dx = (W - w) / 2, dy = H - ph;
       f.drawImage(img, dx, dy, w, h);
-      x.lineWidth = Math.max(1, fs * 0.004);
-      x.strokeStyle = dark ? "rgba(212,255,63,.75)" : "rgba(255,255,255,.6)";
-      x.lineJoin = "round";
-      drawWord(x, true);
-      x.globalCompositeOperation = "destination-in";
-      x.drawImage(img, dx, dy, w, h);
-      f.drawImage(scratch, 0, 0, W, H);
     }
     scratch.width = scratch.height = 1;  // release memory
   }
